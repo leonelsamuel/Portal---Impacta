@@ -1,0 +1,58 @@
+<div class="container">
+  <app-loader [condition]="loading"></app-loader>
+  <form *ngIf="!loading" id="new_customer" method="post">
+    <div class="modal-header">
+      <h5 class="modal-title"><b>{{aluno._id ? 'Atualização de Aluno' : 'Cadastro de Aluno'}}</b></h5>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="col">
+          <input [(ngModel)]="aluno.name" name="nome" class="form-control"
+            placeholder="Digite o nome completo do Aluno..." type="text" name="nomeAluno">
+        </div>
+
+        <div class="input-group col-3 mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">RA</span>
+          </div>
+          <input [(ngModel)]="aluno.RA" disabled name="matricula" type="text" class="form-control"
+            placeholder="A matrícula será gerada..." type="text" name="matriculaAluno">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class=" col-2 mb-3">
+          <span class="input-group-text" title="Escolha uma Disciplina..." id="basic-addon1">Escolha uma Disci...</span>
+        </div>
+        <div class="col">
+          <ng-select [clearable]="true" [multiple]="true" bindValue="id" [items]="disciplines" bindLabel="name"
+            [(ngModel)]="aluno.disciplines_id" name="aluno.disciplines" [closeOnSelect]="false"
+            [searchable]="false">
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div class="ng-value" *ngFor="let item of items | slice:0:5">
+                <span class="ng-value-label">
+                  {{item.name}}</span>
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              </div>
+              <div class="ng-value" *ngIf="items.length > 5">
+                <span class="ng-value-label">{{items.length - 5}} more...</span>
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer row classFooter">
+      <div class="col mb-3">
+        <input type="submit" name="cancel" id="voltar" value="Voltar" class="btn btn-secondary"
+          [routerLink]="['/alunos']">
+      </div>
+
+      <button (click)="save()" type="button" class="btn btn-primary col-1 mb-3 cssbutton">
+        {{aluno.id ? 'Atualizar' : 'Cadastrar'}}
+      </button>
+    </div>
+  </form>
+</div>

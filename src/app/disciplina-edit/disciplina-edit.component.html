@@ -1,0 +1,55 @@
+<div class="container">
+  <app-loader [condition]="loading"></app-loader>
+  <form *ngIf="!loading" id="new_customer" method="post">
+    <div class="modal-header">
+      <h5 class="modal-title"><b>{{discipline.id ? 'Atualização de Disciplina' : 'Cadastro de Disciplina'}}</b></h5>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-row mb-3">
+        <div class="col-3">
+          <input [(ngModel)]="discipline.name" title="Nome da discipllina" name="name" class="form-control" placeholder="Digite o nome da disc..."
+            type="text">
+        </div>
+          <div class=" col-3 mb-3">
+            <span class="input-group-text" title="Selecione um professor" id="basic-addon1">Selecione a carga horaria</span>
+          </div>
+          <div class="col">
+            <ng-select [items]="horarios" [(ngModel)]="discipline.workload" name="discipline.workload"></ng-select>
+          </div>
+      </div>
+      <div class="form-row">
+        <div class=" col-3 mb-3">
+          <span class="input-group-text" title="Selecione um professor" id="basic-addon1">Selecione um Professor</span>
+        </div>
+        <div class="col">
+          <ng-select [clearable]="true" [multiple]="true" bindValue="id" [items]="teacher" bindLabel="name"
+            [(ngModel)]="discipline.teacher_id" name="discipline.teacher_id" [closeOnSelect]="false"
+            [searchable]="false">
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div class="ng-value" *ngFor="let item of items | slice:0:5">
+                <span class="ng-value-label">
+                  {{item.name}}</span>
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              </div>
+              <div class="ng-value" *ngIf="items.length > 5">
+                <span class="ng-value-label">{{items.length - 5}} more...</span>
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer row classFooter">
+      <div class="col mb-3">
+        <input type="submit" name="cancel" id="voltar" value="Voltar" class="btn btn-secondary"
+          [routerLink]="['/disciplinas']">
+      </div>
+
+      <button (click)="save()" type="button" class="btn btn-primary col-1 mb-3 cssbutton">
+        {{discipline._id ? 'Atualizar' : 'Cadastrar'}}
+      </button>
+    </div>
+  </form>
+</div>
