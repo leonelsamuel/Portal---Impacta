@@ -16,7 +16,7 @@
     "@ng-select/ng-select": "^4.0.0",
     "core-js": "^2.5.7",
     "es6-shim": "^0.35.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ng-multiselect-dropdown": "^0.2.10",
     "ng-sidebar": "^8.1.1",
     "ngx-order-pipe": "^2.0.4",
